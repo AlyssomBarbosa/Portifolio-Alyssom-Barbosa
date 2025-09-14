@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfólio - Alyssom Barbosa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Alyssom Barbosa</h1>
+      <h2>Front-End em Formação</h2>
+      <p>Criando interfaces únicas com HTML, CSS e JavaScript</p>
+
+      <nav>
+        <ul>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hero-img">
+      <!-- CORRIGIDO: verifique o nome do arquivo dentro de assets (avatar.png) -->
+      <img src="assets/avatar.png.png" alt="Avatar gamer de Alyssom Barbosa">
+      <!-- Toggle de som -->
+      <button id="sound-toggle" aria-pressed="false" title="Ativar/Desativar sons">🔇 Sons</button>
+    </div>
+  </header>
+
+  <footer>
+    <p>Feito por Barbosa Dev |
+      <a href="https://github.com/alyssombarbosa" target="_blank">GitHub</a> |
+      <a href="https://www.linkedin.com/in/alyssom-barbosa-a66865300/" target="_blank">LinkedIn</a>
+    </p>
+  </footer>
+
+  <!-- Áudios (verifique nomes em assets/) -->
+  <audio id="hover-sound" src="Assets/801081__tony_cannoli__select-sound.wav" preload="auto"></audio>
+  <audio id="click-sound" src="Assets/823587__happypizzabread__game-ui-sfx-practice-2.wav" preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
