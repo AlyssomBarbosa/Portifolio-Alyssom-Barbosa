@@ -3,47 +3,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const hoverSound = document.getElementById("hover-sound");
   const clickSound = document.getElementById("click-sound");
 
-  // botão toggle que o usuário usa para ativar/desativar sons
+  // botão toggle
   const soundToggle = document.getElementById("sound-toggle");
-  let soundEnabled = false;
 
-  // Função para tentar "destravar" o áudio (executada num clique do usuário)
-  function unlockAudio() {
-    if (!soundEnabled) {
-      // tocar um som de click para "destravar" o autoplay (é um gesto do usuário)
-      if (clickSound) {
-        clickSound.currentTime = 0;
-        clickSound.play().catch(() => {});
-      }
-      soundEnabled = true;
-      if (soundToggle) {
-        soundToggle.textContent = "🔊 Sons";
-        soundToggle.setAttribute("aria-pressed", "true");
-      }
+  // pega o estado salvo (se existir)
+  let soundEnabled = localStorage.getItem("soundEnabled") === "true";
+
+  // aplica o estado inicial no botão
+  if (soundToggle) {
+    if (soundEnabled) {
+      soundToggle.textContent = "🔊 Sons";
+      soundToggle.setAttribute("aria-pressed", "true");
+    } else {
+      soundToggle.textContent = "🔇 Sons";
+      soundToggle.setAttribute("aria-pressed", "false");
     }
   }
 
-  // se o botão existe, usa ele como forma de habilitar/desabilitar sons
+  // alternar o som ao clicar no botão
   if (soundToggle) {
     soundToggle.addEventListener("click", () => {
-      if (!soundEnabled) {
-        unlockAudio();
+      soundEnabled = !soundEnabled;
+      localStorage.setItem("soundEnabled", soundEnabled); // salva no navegador
+      if (soundEnabled) {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(() => {});
+        soundToggle.textContent = "🔊 Sons";
+        soundToggle.setAttribute("aria-pressed", "true");
       } else {
-        soundEnabled = false;
         soundToggle.textContent = "🔇 Sons";
         soundToggle.setAttribute("aria-pressed", "false");
       }
     });
   }
 
-  // também, se o usuário clicar em qualquer lugar da página a primeira vez, destravamos áudio
-  document.addEventListener("click", function firstClick() {
-    unlockAudio();
-    // só executar na primeira vez
-    document.removeEventListener("click", firstClick);
-  });
-
-  // seleciona elementos interativos
+  // elementos interativos
   const interactiveElements = document.querySelectorAll("a, button, .card a, .form-contato button");
 
   interactiveElements.forEach(el => {
@@ -64,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // prevenção do submit real do formulário (se existir)
+  // formulário de contato (fake)
   const form = document.querySelector(".form-contato");
   if (form) {
     form.addEventListener("submit", (e) => {
